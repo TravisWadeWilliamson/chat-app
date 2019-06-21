@@ -1,0 +1,15 @@
+{
+    "name": "alex-chat",
+    "version": "1.0.0",
+    "description": "chat app using mongoDB and sockets",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "mongodb": "^3.2.7",
+        "socket.io": "^2.2.0"
+    }
+}
