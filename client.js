@@ -31,9 +31,8 @@
     if (socket !== undefined) {
         console.log('Connected to socket...');
 
-        socket.on('output', function(data) {
-            console.log(data)
-        });
+        console.log('poopy shit happens here........')
+        socket.on('output', function(data) {});
     }
 
 })();
