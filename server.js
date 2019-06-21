@@ -1,5 +1,5 @@
 const mongo = require('mongodb').MongoClient;
-const client = require('socket.io').listen(3131).sockets;
+const client = require('socket.io').listen(3001).sockets;
 
 //Connect to mongodb
 mongo.connect("mongodb://localhost/populatedb", { useNewUrlParser: true }, function(err, db) {

@@ -25,11 +25,15 @@
     }
 
     // Connect to socket.io
-    let socket = io.connect('http://localhost:3131');
+    let socket = io.connect('localhost:3001');
 
     //Check for connection
     if (socket !== undefined) {
-        console.log('Connected to socket')
+        console.log('Connected to socket...');
+
+        socket.on('output', function(data) {
+            console.log(data)
+        });
     }
 
 })();
