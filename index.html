@@ -1,43 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="./style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./style.css" type="text/css" />
     <title>Alex Chat</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 col-sm-12">
-                <h1 class="text-center">
-                    Alex Chat
-                    <button id="clear" class="btn btn-danger">Clear Chat History</button>
-                </h1>
-                <div id="status"></div>
-                <div id="chat">
-                    <input type="text" id="username" class="form-control" placeholder="Enter name...">
-                    <br>
-                    <div class="card">
-                        <div id="messages" class="card-block">
-
-                        </div>
-                    </div>
-                    <br>
-                    <textarea id="textarea" class="form-control" placeholder="Enter message."></textarea>
-                </div>
+      <div class="row">
+        <div class="col-md-6 offset-md-3 col-sm-12">
+          <h1 class="text-center">
+            Alex Chat
+            <button id="clear" class="btn btn-danger">
+              Clear Chat History
+            </button>
+          </h1>
+          <div id="status"></div>
+          <div id="chat">
+            <input
+              type="text"
+              id="username"
+              class="form-control"
+              placeholder="Enter name..."
+            />
+            <br />
+            <div class="card">
+              <div id="messages" class="card-block"></div>
             </div>
+            <br />
+            <textarea
+              id="textarea"
+              class="form-control"
+              placeholder="Enter message."
+            ></textarea>
+          </div>
         </div>
+      </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
-    <script src="./client.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src='./client.js'>
 
-
-</body>
-
+    </script>
+    
 </html>
