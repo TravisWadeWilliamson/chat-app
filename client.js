@@ -33,17 +33,15 @@
     let socket = io.connect('http://localhost:3001');
     console.log('socket?', socket);
 
-    // socket.on('output', function(msg) {
-    //         console.log(msg)
-    //     })
+
     //Check for connection
     if (socket !== undefined) {
         console.log('Connected to socket...');
 
         // Handle output
         socket.on('output', function(data) {
-            console.log(data);
             if (data.length) {
+                console.log(data);
                 for (let i = 0; i < data.length; i++) {
                     //Build out message div
                     let message = document.createElement('div');
@@ -56,19 +54,19 @@
             }
         });
 
-        // // Handle input
-        // textarea.addEventListener('keydown', function(event) {
-        //     console.log("keydown", event)
-        //     if (event.which === 13 && event.shiftKey === false) {
-        //         //Emit to server input
-        //         socket.emit('input', {
-        //             name: username.value,
-        //             message: textarea.value
-        //         });
+        // Handle input
+        textarea.addEventListener('keydown', function(event) {
+            console.log("keydown", event)
+            if (event.which === 13 && event.shiftKey === false) {
+                //Emit to server input
+                socket.emit('input', {
+                    name: username.value,
+                    message: textarea.value
+                });
 
-        //         event.preventDefault();
-        //     }
-        // });
+                event.preventDefault();
+            }
+        });
 
         //Get status from server
         socket.on('status', function(data) {
