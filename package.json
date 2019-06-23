@@ -1,15 +1,24 @@
 {
-    "name": "alex-chat",
+    "name": "chat-app",
     "version": "1.0.0",
-    "description": "chat app using mongoDB and sockets",
+    "description": "simple chat app using sockets and mongodb",
     "main": "server.js",
     "scripts": {
         "start": "node server.js"
     },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/TravisWadeWilliamson/chat-app.git"
+    },
     "author": "",
     "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/TravisWadeWilliamson/chat-app/issues"
+    },
+    "homepage": "https://github.com/TravisWadeWilliamson/chat-app#readme",
     "dependencies": {
         "mongodb": "^3.2.7",
+        "mongoose": "^5.6.0",
         "socket.io": "^2.2.0"
     }
 }

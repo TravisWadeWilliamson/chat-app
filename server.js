@@ -1,60 +1,69 @@
+var chatModel = require('./chat-model');
+var mongoose = require('mongoose');
 const mongo = require('mongodb').MongoClient;
-const client = require('socket.io').listen(3001).sockets;
+const io = require('socket.io').listen(3001).sockets;
 
 //Connect to mongodb
-mongo.connect("mongodb://localhost/populatedb", { useNewUrlParser: true }, function(err, db) {
-    if (err) {
-        throw err;
-    }
+mongoose.connect('mongodb://localhost/mongochat', { useNewUrlParser: true }, function() {
+
     console.log('MongoDB connected...!!!');
+
     //Connect to socket.io
-    client.on('connection', function(socket) {
-        let chat = db.collection('chats');
+    io.on('connection', function(socket) {
 
-        //Create function to send status to client
+        console.log('user connected');
+
+        //Create function to send status to user from server
         sendStatus = function(status) {
-                socket.emit('status', status)
-            }
-            //Get chats from mongo collection
-        chat.find().limit(1000).sort({ _id: 1 }).toArray(function(err, res) {
-            if (err) {
-                throw err;
-            }
+            socket.emit('status', status);
+        }
 
-            //Emit messages to the client
-            socket.emit('output', res);
-        });
+        // Get chats from mongo collection
+        chatModel.find({}).sort({ _id: -1 })
+            .then(function(res) {
 
-        // Handle input events
-        socket.on('input', function(data) {
-            let name = data.name;
-            let message = data.message;
+                // //Emit messages to the user
+                socket.emit('output', res);
+                // console.log(res)
+            });
 
-            //Check for name and message
-            if (name === '' || message === '') {
-                sendStatus('Please enter name and message.')
-            } else {
-                //Insert message into DB
-                chat.insert({ name: name, message: message }, function() {
-                    //Emit output back to client
-                    client.emit('output', [data]);
 
-                    //Send status object
-                    sendStatus({
-                        message: 'Message sent.',
-                        clear: true
-                    })
-                });
-            }
-        });
 
-        //Handle clear
-        socket.on('clear', function(data) {
-            //Remove all chats from the collection
-            chat.remove({}, function() {
-                //Emit messages have been cleared
-                socket.emit('Chat history cleared.')
-            })
-        })
+        // // Handle input events from the user
+        // socket.on('input', function(data) {
+        //     let name = data.name;
+        //     let message = data.message;
+        //     console.log('inside input', data);
+
+        //     //Check for name and message
+        //     if (name == '' || message == '') {
+        //         sendStatus('Please enter name and message.');
+        //     } else {
+
+        //         //Insert message into DB
+        //         chat.insert({ name: name, message: message }, function() {
+
+        //             //Emit output back to user
+        //             io.emit('output', [data]);
+        //             console.log('output', [data])
+        //                 //Send status object
+        //             sendStatus({
+        //                 message: 'Message sent.',
+        //                 clear: true
+        //             });
+        //         });
+        //     }
+        // });
+
+        // // Handle clear
+        // socket.on('clear', function(data) {
+
+        //     //Remove all chats from the collectionnp
+        //     chat.remove({}, function() {
+
+        //         //Emit messages have been cleared
+        //         socket.emit('Chat history cleared.')
+        //     });
+        // });
     });
 });
